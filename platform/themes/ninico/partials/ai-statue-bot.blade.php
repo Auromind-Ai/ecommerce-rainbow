@@ -51,7 +51,7 @@
             <div class="tse-ai-msg tse-ai-msg-bot">
                 <div class="tse-ai-msg-avatar">🗿</div>
                 <div class="tse-ai-msg-bubble">
-                    <p class="mb-0">Upload a clear photo (single portrait, couple, family, or pet). Our AI sculptor will carve an original 3D statue preview for you!</p>
+                    <p class="mb-0">Upload a clear photo (single portrait, couple, family, or pet). Our AI sculptor will craft a 3D statue preview preserving your <strong>exact dress colors, hair color, and skin tone</strong> on an authentic pedestal!</p>
                 </div>
             </div>
 
@@ -85,7 +85,7 @@
                     <div class="tse-ai-styles-grid">
                         <button type="button" class="tse-ai-style-pill active" data-style="clay">
                             <span class="tse-ai-style-emoji">🎨</span>
-                            <span class="tse-ai-style-txt">Lifelike Clay</span>
+                            <span class="tse-ai-style-txt">Real-Color 3D Statue</span>
                         </button>
                         <button type="button" class="tse-ai-style-pill" data-style="bronze">
                             <span class="tse-ai-style-emoji">🏛️</span>
@@ -101,6 +101,8 @@
                         </button>
                     </div>
                 </div>
+
+                <div id="tse-ai-error-notice" class="tse-ai-error-box mt-10" style="display: none;"></div>
 
                 <!-- Action Button -->
                 <button type="button" id="tse-ai-btn-sculpt" class="tse-ai-btn-sculpt mt-15" disabled>
@@ -394,7 +396,11 @@
                     clearInterval(timer);
                     sculptingState.style.display = 'none';
                     inputCard.style.display = 'block';
-                    alert('⚠️ Notice: ' + err.message);
+                    var errNotice = document.getElementById('tse-ai-error-notice');
+                    if (errNotice) {
+                        errNotice.innerHTML = '<div style="background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; padding: 10px 12px; border-radius: 10px; font-size: 12px; line-height: 1.4;"><i class="fas fa-info-circle"></i> ' + (err.message || 'Please check your connection or choose another photo.') + '</div>';
+                        errNotice.style.display = 'block';
+                    }
                     scrollToBottom();
                 });
             });

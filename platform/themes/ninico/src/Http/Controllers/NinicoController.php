@@ -473,14 +473,6 @@ class NinicoController extends PublicController
             'style' => 'nullable|string',
         ]);
 
-        $apiKey = env('STABILITY_API_KEY', 'sk-8crZNRj3dZyEAdjCVns9J743ZU5lLQHfAVfwtB9nH2HuZ5uD');
-
-        if (! $apiKey) {
-            return $this->response
-                ->setError(true)
-                ->setMessage('Stability AI API key is not configured.');
-        }
-
         $imageFile = $request->file('image');
         if (! $imageFile || ! $imageFile->isValid()) {
             return $this->response
@@ -500,91 +492,59 @@ class NinicoController extends PublicController
             $origFilePath = $storageDir . '/' . $origFileName;
             $origPublicUrl = asset('storage/ai-previews/' . $origFileName);
 
-            // Resize image to max 1024x1024 for Stability API efficiency if GD is available
-            $preparedImagePath = $this->prepareImageForStability($origFilePath);
-
-            // Select prompt based on style
             $styleKey = $request->input('style', 'clay');
             $stylePrompts = [
                 'clay' => [
-                    'name' => 'Lifelike Hand-Painted Clay',
-                    'prompt' => 'A handcrafted 3D commemorative miniature figurine statue of the subject, realistic polyresin hand-painted clay sculpture standing on an elegant polished dark walnut circular pedestal base, exquisite artisan handmade detail, tactile clay texture, soft museum studio lighting, handcrafted artisan sculpture masterpiece',
+                    'name' => 'Real-Color 3D Statue',
+                    'prompt' => 'A lifelike full-color handcrafted 3D commemorative miniature figurine statue of the subject, strictly preserving the exact dress colors, exact dress pattern, exact face, natural skin tone, and exact hair color from the original photo. A beautifully sculpted hand-painted polyresin figurine mounted on a circular polished dark mahogany wooden pedestal display base. Artisan handcrafted detailing, realistic studio lighting, miniature figurine depth of field, 8k resolution masterpiece',
+                    'negative' => 'monochrome, black and white, grayscale, washed out colors, changed dress color, different clothing, bronze, stone, marble, flat, 2d drawing, cartoon, anime, illustration, blurry, bad anatomy, deformed',
+                    'strength' => '0.72',
                 ],
                 'bronze' => [
                     'name' => 'Royal Antique Bronze',
                     'prompt' => 'A museum quality bronze commemorative sculpture statue of the subject, antique metallic bronze patina with subtle green oxidized highlights, standing on a solid granite pedestal, detailed sculptural chisel marks, dramatic gallery spotlighting, fine art bronze casting',
+                    'negative' => 'blurry, low quality, bad anatomy, deformed, distorted, extra limbs, cartoon, 2d drawing, flat illustration, sketch, text, watermark',
+                    'strength' => '0.70',
                 ],
                 'marble' => [
                     'name' => 'White Italian Marble',
                     'prompt' => 'A classical fine art white Italian Carrara marble sculpture bust and figurine of the subject, translucent polished stone surface, subtle grey veining, classical Roman renaissance sculptural style, museum lighting, immaculate carved marble details',
+                    'negative' => 'blurry, low quality, bad anatomy, deformed, distorted, extra limbs, cartoon, 2d drawing, flat illustration, sketch, text, watermark',
+                    'strength' => '0.70',
                 ],
                 'wood' => [
                     'name' => 'Natural Sandalwood Carving',
                     'prompt' => 'A finely hand-carved natural sandalwood wooden figurine statue of the subject, rich warm teak wood grain, delicate artisan knife chisel details, smooth lacquer polish, solid wooden base, heritage craftsmanship',
+                    'negative' => 'blurry, low quality, bad anatomy, deformed, distorted, extra limbs, cartoon, 2d drawing, flat illustration, sketch, text, watermark',
+                    'strength' => '0.70',
                 ],
             ];
 
             $selectedStyle = $stylePrompts[$styleKey] ?? $stylePrompts['clay'];
-            $prompt = $selectedStyle['prompt'];
-            $negativePrompt = 'blurry, low quality, bad anatomy, deformed, distorted, extra limbs, cartoon, 2d drawing, flat illustration, sketch, text, watermark, bad lighting';
+            $apiKey = env('STABILITY_API_KEY', 'sk-8crZNRj3dZyEAdjCVns9J743ZU5lLQHfAVfwtB9nH2HuZ5uD');
 
-            // Send request to Stability AI structure endpoint
-            $ch = curl_init('https://api.stability.ai/v2beta/stable-image/control/structure');
-            $postData = [
-                'image' => new \CURLFile($preparedImagePath),
-                'prompt' => $prompt,
-                'negative_prompt' => $negativePrompt,
-                'control_strength' => '0.70',
-                'output_format' => 'webp',
-            ];
+            // Resize image to max 1024x1024 for Stability API efficiency
+            $preparedImagePath = $this->prepareImageForStability($origFilePath);
 
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_POST, true);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
-            curl_setopt($ch, CURLOPT_HTTPHEADER, [
-                'Authorization: Bearer ' . $apiKey,
-                'Accept: application/json',
-            ]);
-            curl_setopt($ch, CURLOPT_TIMEOUT, 60);
+            $statuePublicUrl = null;
 
-            $response = curl_exec($ch);
-            $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-            $curlError = curl_error($ch);
-            curl_close($ch);
-
-            if ($curlError) {
-                Log::error('Stability AI curl error: ' . $curlError);
-                return $this->response
-                    ->setError(true)
-                    ->setMessage('Connection to AI sculptor service failed: ' . $curlError);
+            // Attempt Stability AI API if key is present
+            if ($apiKey) {
+                $statuePublicUrl = $this->callStabilityAiApi(
+                    $apiKey,
+                    $preparedImagePath,
+                    $storageDir,
+                    $selectedStyle['prompt'],
+                    $selectedStyle['negative'],
+                    (float) ($selectedStyle['strength'] ?? 0.35)
+                );
             }
 
-            if ($httpCode !== 200) {
-                $errJson = json_decode($response, true);
-                $errMsg = $errJson['errors'][0] ?? $errJson['message'] ?? ('AI service returned error code: ' . $httpCode);
-                Log::error('Stability AI error response: ' . $response);
-
-                if ($httpCode === 402 || str_contains(strtolower($errMsg), 'balance')) {
-                    $errMsg = 'Stability AI credits depleted. Please top up your balance at platform.stability.ai.';
-                }
-
+            if (! $statuePublicUrl) {
                 return $this->response
                     ->setError(true)
-                    ->setMessage($errMsg);
+                    ->setMessage('Stability AI sculptor is temporarily unavailable or out of credits. Please check your credits at platform.stability.ai or contact our master artisan directly on WhatsApp to sculpt your statue!');
             }
-
-            $result = json_decode($response, true);
-            if (empty($result['image'])) {
-                return $this->response
-                    ->setError(true)
-                    ->setMessage('Failed to obtain statue image from AI response.');
-            }
-
-            $statueBytes = base64_decode($result['image']);
-            $statueFileName = 'statue_' . uniqid() . '.webp';
-            $statueFilePath = $storageDir . '/' . $statueFileName;
-            File::put($statueFilePath, $statueBytes);
-            $statuePublicUrl = asset('storage/ai-previews/' . $statueFileName);
 
             return $this->response
                 ->setData([
@@ -599,57 +559,122 @@ class NinicoController extends PublicController
             Log::error('AI Statue Preview exception: ' . $e->getMessage() . "\n" . $e->getTraceAsString());
             return $this->response
                 ->setError(true)
-                ->setMessage('Error generating statue preview: ' . $e->getMessage());
+                ->setMessage($e->getMessage() ?: 'Error generating statue preview.');
         }
+    }
+
+    protected function callStabilityAiApi(
+        string $apiKey,
+        string $preparedImagePath,
+        string $storageDir,
+        string $prompt,
+        string $negativePrompt,
+        float $imageStrength = 0.35
+    ): ?string {
+        $url = 'https://api.stability.ai/v1/generation/stable-diffusion-xl-1024-v1-0/image-to-image';
+
+        // SDXL strength: 0.35-0.40 transforms into 3D polymer clay/polyresin miniature sculpture
+        $strength = ($imageStrength > 0 && $imageStrength <= 1.0) ? $imageStrength : 0.35;
+
+        $postData = [
+            'init_image' => new \CURLFile($preparedImagePath, 'image/png', 'image.png'),
+            'init_image_mode' => 'IMAGE_STRENGTH',
+            'image_strength' => (string) $strength,
+            'text_prompts[0][text]' => $prompt,
+            'text_prompts[0][weight]' => '1.0',
+            'text_prompts[1][text]' => $negativePrompt,
+            'text_prompts[1][weight]' => '-1.0',
+            'samples' => '1',
+            'steps' => '30',
+        ];
+
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Authorization: Bearer ' . $apiKey,
+            'Accept: application/json',
+        ]);
+        curl_setopt($ch, CURLOPT_ENCODING, '');
+        curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 15);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 60);
+
+        $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $curlError = curl_error($ch);
+        curl_close($ch);
+
+        if ($curlError) {
+            Log::warning('Stability AI SDXL cURL error: ' . $curlError);
+            throw new \Exception('Could not connect to Stability AI. Please check your internet connection.');
+        }
+
+        if ($httpCode !== 200) {
+            Log::warning("Stability AI SDXL HTTP {$httpCode}: " . substr((string) $response, 0, 300));
+            $errJson = json_decode((string) $response, true);
+            $msg = $errJson['message'] ?? $errJson['errors'][0] ?? "HTTP {$httpCode}";
+            if ($httpCode === 402 || str_contains(strtolower($msg), 'credit') || str_contains(strtolower($msg), 'balance')) {
+                throw new \Exception('Your Stability AI account has run out of credits. Please purchase credits at platform.stability.ai/dashboard/billing or consult our artisan on WhatsApp!');
+            }
+            throw new \Exception('Stability AI service returned: ' . $msg);
+        }
+
+        $result = json_decode((string) $response, true);
+        if (! empty($result['artifacts'][0]['base64'])) {
+            $statueBytes = base64_decode($result['artifacts'][0]['base64']);
+            $statueFileName = 'statue_' . uniqid() . '.png';
+            $statueFilePath = $storageDir . '/' . $statueFileName;
+            File::put($statueFilePath, $statueBytes);
+            return asset('storage/ai-previews/' . $statueFileName);
+        }
+
+        return null;
     }
 
     protected function prepareImageForStability(string $filePath): string
     {
-        if (! extension_loaded('gd')) {
-            return $filePath;
-        }
-
         try {
-            [$width, $height, $imageType] = getimagesize($filePath);
-            if (! $width || ! $height) {
-                return $filePath;
-            }
-
-            $maxDim = 1024;
-            if ($width <= $maxDim && $height <= $maxDim) {
-                return $filePath;
-            }
-
-            if ($width > $height) {
-                $newWidth = $maxDim;
-                $newHeight = (int) round(($height / $width) * $maxDim);
-            } else {
-                $newHeight = $maxDim;
-                $newWidth = (int) round(($width / $height) * $maxDim);
-            }
-
-            $srcImage = match ($imageType) {
-                IMAGETYPE_JPEG => imagecreatefromjpeg($filePath),
-                IMAGETYPE_PNG => imagecreatefrompng($filePath),
-                IMAGETYPE_WEBP => imagecreatefromwebp($filePath),
-                default => null,
-            };
-
+            $fileData = file_get_contents($filePath);
+            $srcImage = imagecreatefromstring($fileData);
             if (! $srcImage) {
                 return $filePath;
             }
 
-            $dstImage = imagecreatetruecolor($newWidth, $newHeight);
-            imagecopyresampled($dstImage, $srcImage, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+            $srcW = imagesx($srcImage);
+            $srcH = imagesy($srcImage);
 
-            $resizedPath = dirname($filePath) . '/prepared_' . basename($filePath);
-            imagejpeg($dstImage, $resizedPath, 90);
+            // SDXL requires exact dimensions (1024x1024)
+            $targetDim = 1024;
+            $dstImage = imagecreatetruecolor($targetDim, $targetDim);
+
+            // Preserve aspect ratio and center on canvas
+            $scale = min($targetDim / $srcW, $targetDim / $srcH);
+            $newW = (int) round($srcW * $scale);
+            $newH = (int) round($srcH * $scale);
+            $dstX = (int) round(($targetDim - $newW) / 2);
+            $dstY = (int) round(($targetDim - $newH) / 2);
+
+            // Fill background with matching edge color
+            $sampleCol = imagecolorat($srcImage, min(5, $srcW - 1), min(5, $srcH - 1));
+            $r = ($sampleCol >> 16) & 0xFF;
+            $g = ($sampleCol >> 8) & 0xFF;
+            $b = $sampleCol & 0xFF;
+            $bgCol = imagecolorallocate($dstImage, $r, $g, $b);
+            imagefill($dstImage, 0, 0, $bgCol);
+
+            imagecopyresampled($dstImage, $srcImage, $dstX, $dstY, 0, 0, $newW, $newH, $srcW, $srcH);
+
+            $preparedPath = dirname($filePath) . '/prepared_1024_' . uniqid() . '.png';
+            imagepng($dstImage, $preparedPath, 8);
 
             imagedestroy($srcImage);
             imagedestroy($dstImage);
 
-            return $resizedPath;
-        } catch (Throwable) {
+            return $preparedPath;
+        } catch (Throwable $e) {
+            Log::warning('prepareImageForStability error: ' . $e->getMessage());
             return $filePath;
         }
     }
