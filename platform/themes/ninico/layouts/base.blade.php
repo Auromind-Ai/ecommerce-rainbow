@@ -27,6 +27,8 @@
 
         {!! Theme::partial('scroll-top') !!}
 
+        {!! Theme::partial('ai-statue-bot') !!}
+
         @yield('content')
 
         @if(is_plugin_active('ecommerce') && theme_option('bottom_mobile_menu_enabled', 'yes') === 'yes')

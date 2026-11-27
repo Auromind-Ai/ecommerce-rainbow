@@ -2,6 +2,8 @@
 /public/hot
 /public/storage/custom-orders/*
 !/public/storage/custom-orders/.gitkeep
+/public/storage/ai-previews/*
+!/public/storage/ai-previews/.gitkeep
 /storage/*.key
 /vendor
 .DS_Store

@@ -6,6 +6,7 @@ use Theme\Ninico\Http\Controllers\NinicoController;
 
 Route::group(['controller' => NinicoController::class, 'middleware' => ['web', 'core']], function () {
     Route::post('ajax/custom-order-request', 'ajaxSubmitCustomOrder')->name('public.ajax.custom-order-request');
+    Route::post('ajax/ai-statue-preview', 'ajaxAiStatuePreview')->name('public.ajax.ai-statue-preview');
 
     Route::group(apply_filters(BASE_FILTER_GROUP_PUBLIC_ROUTE, []), function () {
         Route::group(['prefix' => 'ajax', 'as' => 'public.ajax.'], function () {
