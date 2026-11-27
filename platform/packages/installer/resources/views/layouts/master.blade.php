@@ -19,6 +19,7 @@
 
     @include('core/base::components.layouts.header')
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta20/dist/css/tabler.min.css">
     <link
         href="{{ asset('vendor/core/packages/installer/css/style.css') }}?v={{ get_cms_version() }}"
         rel="stylesheet"
@@ -28,6 +29,72 @@
         [v-cloak],
         [x-cloak] {
             display: none;
+        }
+        body {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #2073BF 100%) !important;
+            background-attachment: fixed !important;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+            min-height: 100vh;
+            color: #1e293b;
+        }
+        .installer-container {
+            max-width: 980px !important;
+            margin: 40px auto !important;
+            padding: 0 15px;
+        }
+        .installer-wrapper {
+            background: #ffffff !important;
+            border-radius: 16px !important;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.28) !important;
+            overflow: hidden !important;
+        }
+        .steps-backdrop {
+            background: #f8fafc;
+            border-right: 1px solid #e2e8f0;
+        }
+        .step-item {
+            color: #64748b;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .step-item.active {
+            color: #2073BF !important;
+            font-weight: 700;
+        }
+        .card {
+            border: none !important;
+            box-shadow: none !important;
+        }
+        .card-header {
+            background: transparent !important;
+            border-bottom: 1px solid #f1f5f9 !important;
+            padding: 24px !important;
+        }
+        .card-body {
+            padding: 28px !important;
+        }
+        .card-footer {
+            background: #f8fafc !important;
+            border-top: 1px solid #f1f5f9 !important;
+            padding: 18px 28px !important;
+        }
+        .btn-primary {
+            background: #2073BF !important;
+            border-color: #2073BF !important;
+            border-radius: 8px !important;
+            padding: 10px 24px !important;
+            font-weight: 600 !important;
+            box-shadow: 0 4px 12px rgba(32, 115, 191, 0.35) !important;
+        }
+        .btn-primary:hover {
+            background: #154c80 !important;
+            border-color: #154c80 !important;
+        }
+        .form-select, .form-control {
+            border-radius: 8px !important;
+            border: 1.5px solid #cbd5e1 !important;
+            padding: 10px 14px !important;
+            font-size: 14px !important;
         }
     </style>
 
@@ -81,9 +148,12 @@
     <div class="page-wrapper justify-content-center min-h-full">
         <div class="page-body page-content">
             <div class="container-xl installer-container">
-                <div class="row mb-6">
+                <div class="row mb-4 text-center">
                     <div class="col">
-                        <h2 class="h1 page-title justify-content-center text-white">
+                        <div class="d-inline-flex align-items-center gap-2 px-3 py-1 bg-white bg-opacity-25 text-white rounded-pill mb-2 font-weight-bold" style="font-size: 13px; backdrop-filter: blur(4px);">
+                            <span>✨ Auromind AI Platform</span>
+                        </div>
+                        <h2 class="h1 page-title justify-content-center text-white fw-bold mb-0">
                             {{ trans('packages/installer::installer.title') }}
                         </h2>
                     </div>

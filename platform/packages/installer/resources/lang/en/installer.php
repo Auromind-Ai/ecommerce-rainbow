@@ -7,11 +7,11 @@ return [
      * Shared translations.
      *
      */
-    'title' => 'Installation',
+    'title' => 'Auromind AI Installation',
     'next' => 'Next Step',
     'back' => 'Previous',
     'finish' => 'Install',
-    'installation' => 'Installation',
+    'installation' => 'Auromind AI Setup',
     'forms' => [
         'errorTitle' => 'The following errors occurred:',
     ],
@@ -22,8 +22,8 @@ return [
      *
      */
     'welcome' => [
-        'title' => 'Welcome',
-        'message' => 'Before getting started, we need some information on the database. You will need to know the following items before proceeding.',
+        'title' => 'Welcome to Auromind AI',
+        'message' => 'Before getting started, we need some information on the database to configure your platform. You will need to know the following items before proceeding.',
         'language' => 'Language',
         'next' => 'Let\'s go',
     ],
