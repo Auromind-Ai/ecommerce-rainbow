@@ -78,7 +78,6 @@
             </div>
             <div class="col-xl-4 d-none d-xl-block">
                 <div class="headertoplag d-flex align-items-center justify-content-end">
-                    {!! Theme::partial('currency-switcher') !!}
                     {!! Theme::partial('language-switcher') !!}
                     @if(theme_option('social_links') && $socialLinks = json_decode(theme_option('social_links'), true))
                         <div class="menu-top-social">

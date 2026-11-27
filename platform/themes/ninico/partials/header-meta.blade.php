@@ -1,6 +1,6 @@
 @if (is_plugin_active('ecommerce'))
-    <div @class(['header-meta d-flex align-items-center', $class ?? null])>
-        <div class="header-meta__social d-flex align-items-center ml-25">
+    <div @class(['header-meta d-flex align-items-center flex-shrink-0', $class ?? null])>
+        <div class="header-meta__social d-flex align-items-center gap-2 gap-xl-3">
             @if(EcommerceHelper::isCartEnabled())
                 <button class="header-cart p-relative tp-cart-toggle" title="{{ __('Cart') }}">
                     <i class="fal fa-shopping-bag"></i>

@@ -1,5 +1,4 @@
 <header>
-    {!! Theme::partial('header-top') !!}
     <div class="mainmenuarea d-none d-xl-block">
         <div class="container">
             <div class="row align-items-center">

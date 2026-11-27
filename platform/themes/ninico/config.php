@@ -44,7 +44,9 @@ return [
             $theme->asset()->usePath()->add('magnific-popup-css', 'plugins/magnific-popup/magnific-popup.css');
             $theme->asset()->usePath()->add('jquery-ui-css', 'plugins/jquery-ui/jquery-ui.css');
             $theme->asset()->usePath()->add('theme-css', 'css/theme.css', version: $version);
-            $theme->asset()->usePath()->add('elegant-css', 'css/elegant.css', version: $version);
+            $elegantCssPath = public_path('themes/ninico/css/elegant.css');
+            $elegantVersion = file_exists($elegantCssPath) ? (string) filemtime($elegantCssPath) : $version;
+            $theme->asset()->usePath()->add('elegant-css', 'css/elegant.css', version: $elegantVersion);
 
             $theme->asset()->container('footer')->usePath()->add('jquery', 'plugins/jquery/jquery.min.js');
             $theme->asset()->container('footer')->usePath()->add('waypoints-js', 'js/waypoints.js');

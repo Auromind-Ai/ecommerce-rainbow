@@ -1,5 +1,4 @@
 <header class="platinam-light">
-    {!! Theme::partial('header-top', ['class' => 'platinam-bg platinam-header-top']) !!}
     <div class="mainmenuarea platinam-menuarea mt-30 d-none d-xl-block">
         <div class="container">
             <div class="row align-items-center">

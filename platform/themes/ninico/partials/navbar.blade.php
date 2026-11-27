@@ -4,77 +4,49 @@
     </div>
 @endif
 
-<div id="header-tab-sticky" class="tp-md-lg-header d-none d-md-block d-xl-none pt-30 pb-30">
+<div id="header-tab-sticky" class="tp-md-lg-header d-none d-md-block d-xl-none py-3">
     <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-3 col-md-4 d-flex align-items-center">
-                <div class="flex-auto header-canvas">
-                    <button class="tp-menu-toggle" title="open">
-                        <i class="far fa-bars"></i>
-                    </button>
-                </div>
+        <div class="d-flex align-items-center justify-content-between gap-3">
+            <div class="d-flex align-items-center flex-shrink-0">
+                <button class="tp-menu-toggle header-hamburger-btn me-3" title="{{ __('Menu') }}" type="button">
+                    <i class="fal fa-bars"></i>
+                </button>
                 {!! Theme::partial('logo') !!}
             </div>
             @if (is_plugin_active('ecommerce'))
-                <div class="col-lg-9 col-md-8">
-                    <div class="header-meta-info d-flex align-items-center justify-content-between">
-                        {!! Theme::get('headerSearchBar') !!}
-                        <div class="header-meta__social d-flex align-items-center ml-25">
-                            @if(EcommerceHelper::isCartEnabled())
-                                <button class="header-cart p-relative tp-cart-toggle" title="{{ __('Cart') }}">
-                                    <i class="fal fa-shopping-bag"></i>
-                                    <span class="tp-product-count">{{ Cart::instance('cart')->count() }}</span>
-                                </button>
-                            @endif
-
-                            @if(EcommerceHelper::isCompareEnabled())
-                                <a href="{{ route('public.compare') }}" class="header-cart p-relative">
-                                    <i class="fal fa-exchange"></i>
-                                    <span class="tp-product-compare-count">{{ Cart::instance('compare')->count() }}</span>
-                                </a>
-                            @endif
-
-                            @auth('customer')
-                                <a href="{{ route('customer.overview') }}" title="{{ auth('customer')->user()->name }}"><i class="fal fa-user"></i></a>
-                            @else
-                                <a href="{{ route('customer.login') }}" title="{{ __('Login') }}"><i class="fal fa-user"></i></a>
-                            @endauth
-
-                            @if(EcommerceHelper::isWishlistEnabled())
-                                <a href="{{ route('public.wishlist') }}"><i class="fal fa-heart"></i></a>
-                            @endif
-                        </div>
-                    </div>
+                <div class="header-meta-info d-flex align-items-center justify-content-end flex-grow-1 gap-3 min-w-0">
+                    {!! Theme::get('headerSearchBar') !!}
+                    {!! Theme::partial('header-meta') !!}
                 </div>
             @endif
         </div>
     </div>
 </div>
 
-<div @if(theme_option('sticky_header_mobile_enabled', 'yes') == 'yes') id="header-mob-sticky" @endif @class(['tp-md-lg-header d-md-none pt-20 pb-20', $headerMobileStickyClass ?? null])>
+<div @if(theme_option('sticky_header_mobile_enabled', 'yes') == 'yes') id="header-mob-sticky" @endif @class(['tp-md-lg-header d-md-none py-2', $headerMobileStickyClass ?? null])>
     <div class="container">
-        <div class="row align-items-center">
-            <div class="col-3 d-flex align-items-center">
-                <div class="flex-auto header-canvas">
-                    <button class="tp-menu-toggle" title="open">
-                        <i class="far fa-bars"></i>
-                    </button>
-                </div>
+        <div class="d-flex align-items-center justify-content-between gap-2">
+            <div class="d-flex align-items-center flex-shrink-0">
+                <button class="tp-menu-toggle header-hamburger-btn" title="{{ __('Menu') }}" type="button">
+                    <i class="fal fa-bars"></i>
+                </button>
             </div>
             @if ($logo = theme_option('logo'))
-                <div class="col-6">
-                    <div class="text-center">
-                        {!! Theme::partial('logo') !!}
-                    </div>
+                <div class="text-center flex-grow-1 min-w-0 px-2">
+                    {!! Theme::partial('logo') !!}
                 </div>
             @endif
             @if (is_plugin_active('ecommerce'))
-                <div class="col-3">
-                    <div class="header-meta-info d-flex align-items-center justify-content-end ml-25">
-                        <button class="header-cart p-relative tp-search-sidebar-toggle" title="search">
-                            <i class="fal fa-search"></i>
+                <div class="header-meta d-flex align-items-center flex-shrink-0 gap-2">
+                    <button class="header-cart p-relative tp-search-sidebar-toggle" title="{{ __('Search') }}" type="button">
+                        <i class="fal fa-search"></i>
+                    </button>
+                    @if(EcommerceHelper::isCartEnabled())
+                        <button class="header-cart p-relative tp-cart-toggle" title="{{ __('Cart') }}" type="button">
+                            <i class="fal fa-shopping-bag"></i>
+                            <span class="tp-product-count">{{ Cart::instance('cart')->count() }}</span>
                         </button>
-                    </div>
+                    @endif
                 </div>
             @endif
         </div>
@@ -117,24 +89,16 @@
                         <span>{{ __('Shop All') }}</span>
                     </a>
                 </li>
-                <li>
-                    <a href="{{ url('/product-categories/just-for-her') }}">
-                        <i class="fal fa-heart"></i>
-                        <span>{{ __('Just For Her') }}</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ url('/product-categories/independent-her') }}">
-                        <i class="fal fa-sparkles"></i>
-                        <span>{{ __('Independent Her') }}</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ url('/product-categories/premium-edition') }}">
-                        <i class="fal fa-crown"></i>
-                        <span>{{ __('Premium Edition') }}</span>
-                    </a>
-                </li>
+                @if (! empty($categories))
+                    @foreach ($categories->where('parent_id', 0)->take(8) as $category)
+                        <li>
+                            <a href="{{ $category->url }}">
+                                <i class="fal fa-sparkles"></i>
+                                <span>{{ $category->name }}</span>
+                            </a>
+                        </li>
+                    @endforeach
+                @endif
                 <li>
                     <a href="{{ url('/about') }}">
                         <i class="fal fa-info-circle"></i>
