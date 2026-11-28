@@ -42,3 +42,7 @@
     Html::tag('div', BaseHelper::clean($page->content), ['class' => 'ck-content'])->toHtml(),
     $page
 ) !!}
+
+@if (BaseHelper::isHomepage($page->id))
+    {!! Theme::partial('home-3d-before-after') !!}
+@endif

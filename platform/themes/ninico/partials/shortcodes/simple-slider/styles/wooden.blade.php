@@ -2,6 +2,16 @@
     <div class="row justify-content-center g-0">
         <div class="col-12">
             <div class="tp-slider-area p-relative tse-rounded-slider-area">
+                <a href="#tse-3d-studio-section" class="tse-hero-floating-badge" onclick="event.preventDefault(); document.getElementById('tse-3d-studio-section')?.scrollIntoView({ behavior: 'smooth' });">
+                    <div class="tse-hero-3d-cube">
+                        <i class="fas fa-cube"></i>
+                    </div>
+                    <div class="tse-hero-3d-text">
+                        <strong>3D Statue Studio</strong>
+                        <span>Rotate Sculptures in 360°</span>
+                    </div>
+                    <i class="fal fa-angle-right tse-hero-3d-arrow"></i>
+                </a>
                 <div class="swiper-container tse-hero-swiper p-relative">
                     <div class="swiper-wrapper">
                         @php

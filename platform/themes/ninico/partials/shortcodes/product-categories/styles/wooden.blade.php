@@ -30,7 +30,8 @@
                         : null;
                 @endphp
                 <div class="col-6 col-md-6 col-lg-3">
-                    <div class="tse-cat-card">
+                    <div class="tse-cat-card tse-3d-card tse-3d-tilt">
+                        <span class="tse-cat-3d-badge"><i class="fas fa-cube"></i> 3D Custom</span>
                         <a href="{{ $category->url }}" class="tse-cat-card-link">
                             <div class="tse-cat-card-thumb">
                                 <picture>
@@ -53,3 +54,6 @@
         </div>
     </div>
 </section>
+
+{!! Theme::partial('home-3d-studio') !!}
+{!! Theme::partial('home-3d-process') !!}
