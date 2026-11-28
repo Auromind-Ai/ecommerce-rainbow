@@ -40,29 +40,13 @@
                 @endif
                 <p>{!! BaseHelper::clean(Str::limit($product->description, 200)) !!}</p>
                 <div class="tpproduct__action">
-                    @if (EcommerceHelper::isCompareEnabled())
-                        <a class="add-to-compare" href="{{ route('public.compare.add', $product->id) }}">
-                            <i class="fal fa-exchange"></i>
-                        </a>
-                    @endif
-                    <a class="quickview" href="{{ route('public.ajax.quick-view', $product->id) }}">
+                    <a class="quickview" href="{{ route('public.ajax.quick-view', $product->id) }}" title="{{ __('Quick view') }}">
                         <i class="fal fa-eye"></i>
                     </a>
                     @if (EcommerceHelper::isWishlistEnabled())
-                        <a class="wishlist add-to-wishlist" href="{{ route('public.wishlist.add', $product->getKey()) }}">
+                        <a class="wishlist add-to-wishlist" href="{{ route('public.wishlist.add', $product->getKey()) }}" title="{{ __('Wishlist') }}">
                             <i class="fal fa-heart"></i>
                         </a>
-                    @endif
-                    @if(EcommerceHelper::isCartEnabled())
-                        @if ($product->variations()->exists())
-                            <a href="{{ route('public.ajax.quick-shop', $product->slug) }}" class="button-quick-shop" data-id="{{ $product->id }}">
-                                <i class="fal fa-shopping-cart"></i>
-                            </a>
-                        @else
-                            <a class="add-to-cart" href="{{ route('public.cart.add-to-cart') }}" data-id="{{ $product->id }}">
-                                <i class="fal fa-shopping-cart"></i>
-                            </a>
-                        @endif
                     @endif
                 </div>
             </div>

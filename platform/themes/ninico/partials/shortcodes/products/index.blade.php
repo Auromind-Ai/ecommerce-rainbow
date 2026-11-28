@@ -1,30 +1,51 @@
-<section class="product-area pt-30 pb-30">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 col-12">
-                <div class="tpsection mb-40">
-                    <h2 class="tpsection__title">{!! BaseHelper::clean($shortcode->title) !!}</h2>
-                </div>
-            </div>
-            <div class="col-md-6 col-12">
-                <div class="tpnavbar">
-                    <nav>
-                        <div class="nav nav-tabs" id="product-type-tab" role="tablist" data-route="{{ route('public.ajax.products') }}" data-limit="{{ $shortcode->limit }}">
-                            @foreach($tabs as $key => $value)
-                                @continue(! in_array($key, $selectedTabs) || (! EcommerceHelper::isReviewEnabled() && $key === 'top-rated'))
+@php
+    $products = $products ?? get_products([
+        'take' => (int) ($shortcode->limit ?: 8),
+        'order_by' => ['order' => 'asc', 'created_at' => 'desc']
+    ] + EcommerceHelper::withReviewsParams());
+@endphp
 
-                                <button @class(['nav-link', 'active' => $loop->first]) data-type="{{ $key }}" id="nav-{{ $key }}-tab" data-bs-toggle="tab" data-bs-target="#nav-{{ $key }}" type="button" role="tab" aria-controls="nav-{{ $key }}-tab" @if($loop->first) aria-selected="true" @endif>
-                                    {{ $value }}
-                                </button>
-                            @endforeach
-                        </div>
-                    </nav>
+<section class="tse-products-showcase-section" id="products-showcase">
+    <!-- Corner Ambient Accents matching mockup -->
+    <div class="tse-prod-ambient tse-ambient-top-left"></div>
+    <div class="tse-prod-ambient tse-ambient-top-right"></div>
+    <div class="tse-prod-ambient tse-ambient-bottom-right"></div>
+
+    <div class="container position-relative" style="z-index: 2;">
+        <!-- Section Header -->
+        <div class="row justify-content-center text-center mb-35">
+            <div class="col-lg-9 col-md-11">
+                <!-- Pill Badge -->
+                <div class="tse-prod-pill-badge mb-15">
+                    <span>ORDER OR ENQUIRE</span>
                 </div>
+
+                <!-- Main Title -->
+                <h2 class="tse-prod-heading">
+                    {!! BaseHelper::clean($shortcode->title ?: 'Wedding & Event <span class="tse-text-blue">Couple Statue</span>') !!}
+                </h2>
+
+                <!-- Subtitle -->
+                <p class="tse-prod-subheading">
+                    Turn your special moments into a timeless miniature
+                </p>
+
+                <!-- Gold Accent Line -->
+                <div class="tse-prod-accent-bar"></div>
             </div>
         </div>
-        <div class="tab-content position-relative" id="nav-tabContent">
-            <div class="tab-pane fade show active" role="tabpanel" aria-labelledby="nav-all-tab"></div>
-            <div class="loading-spinner"></div>
+
+        <!-- Product Cards Grid -->
+        <div class="row g-3 g-xl-4 align-items-stretch">
+            @foreach($products as $product)
+                <div class="col-12 col-sm-6 col-lg-3">
+                    @include(Theme::getThemeNamespace('views.ecommerce.includes.product-item'))
+                </div>
+            @endforeach
         </div>
     </div>
 </section>
+
+{!! Theme::partial('home-custom-banner') !!}
+
+{!! Theme::partial('home-faq') !!}

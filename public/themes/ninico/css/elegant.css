@@ -4392,503 +4392,1470 @@ body.checkout-page .row {
     color: #0f172a;
 }
 
+
 /* ==========================================================================
-   HOW IT WORKS - NATIVE NINICO ECOMMERCE FLOW
+   HOW IT WORKS - EXACT REFERENCE DESIGN MATCHING NANO BANANA MOCKUP
    ========================================================================== */
-.tp-how-it-works-area {
-    padding-top: 50px;
-    padding-bottom: 50px;
-    background-color: #F8F9FA;
+.tse-how-it-works-section {
     position: relative;
-    border-top: 1px solid #EAEBED;
-    border-bottom: 1px solid #EAEBED;
+    padding: 65px 0 60px;
+    background-color: #FFFFFF;
+    overflow: hidden;
 }
 
-.tp-how-subtitle {
-    font-family: var(--primary-font, "Jost", sans-serif);
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--primary-color, #2073BF);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    display: inline-block;
-    margin-bottom: 8px;
-}
-
-.tp-how-desc {
-    font-family: var(--primary-font, "Jost", sans-serif);
-    font-size: 15px;
-    color: #777A7D;
-    line-height: 1.6;
-    max-width: 680px;
-    margin: 12px auto 0;
-}
-
-/* Connecting track across steps in desktop view */
-.tp-how-steps-row {
-    position: relative;
+/* Ambient Radial Glows (Sky Blue / Lavender) */
+.tse-how-bg-glow {
+    position: absolute;
+    pointer-events: none;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.65;
     z-index: 1;
 }
 
-@media (min-width: 992px) {
-    .tp-how-steps-row::before {
-        content: "";
-        position: absolute;
-        top: 55px;
-        left: 14%;
-        right: 14%;
-        height: 1.5px;
-        background: #EAEBED;
-        z-index: 1;
-    }
+.tse-how-bg-glow-tl {
+    top: -100px;
+    left: -100px;
+    width: 420px;
+    height: 420px;
+    background: radial-gradient(circle, rgba(219, 234, 254, 0.8) 0%, rgba(238, 242, 255, 0.4) 65%, transparent 100%);
 }
 
-/* Step Card */
-.tp-how-card {
+.tse-how-bg-glow-tr {
+    top: -80px;
+    right: -80px;
+    width: 450px;
+    height: 450px;
+    background: radial-gradient(circle, rgba(224, 238, 255, 0.85) 0%, rgba(237, 233, 254, 0.5) 60%, transparent 100%);
+}
+
+.tse-how-bg-glow-br {
+    bottom: -100px;
+    right: -100px;
+    width: 480px;
+    height: 480px;
+    background: radial-gradient(circle, rgba(237, 233, 254, 0.75) 0%, rgba(245, 243, 255, 0.3) 65%, transparent 100%);
+}
+
+/* Header Elements */
+.tse-how-magic-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #EFF6FF;
+    border: 1px solid #BFDBFE;
+    border-radius: 30px;
+    padding: 6px 20px;
+    color: #1E40AF;
+    font-family: var(--primary-font, "Plus Jakarta Sans", sans-serif);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    box-shadow: 0 2px 10px rgba(59, 130, 246, 0.08);
+}
+
+.tse-how-magic-badge i {
+    color: #2563EB;
+    font-size: 13px;
+}
+
+.tse-how-main-title {
+    font-family: var(--primary-font, "Plus Jakarta Sans", sans-serif);
+    font-size: 46px;
+    font-weight: 800;
+    color: #0F172A;
+    letter-spacing: -0.025em;
+    line-height: 1.18;
+    margin-top: 14px;
+    margin-bottom: 12px;
+}
+
+.tse-how-title-word {
+    color: #2563EB;
     position: relative;
-    z-index: 2;
+    display: inline-block;
+}
+
+.tse-how-swoosh {
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 100%;
+    height: 12px;
+    overflow: visible;
+}
+
+.tse-how-tagline {
+    font-family: var(--primary-font, "Plus Jakarta Sans", sans-serif);
+    font-size: 20px;
+    font-weight: 700;
+    color: #0F172A;
+    margin-bottom: 6px;
+    letter-spacing: -0.01em;
+}
+
+.tse-how-desc {
+    font-family: var(--primary-font, "Plus Jakarta Sans", sans-serif);
+    font-size: 15px;
+    color: #64748B;
+    max-width: 680px;
+    margin: 0 auto;
+    line-height: 1.55;
+}
+
+/* 4 Step Cards Grid */
+.tse-how-grid-wrapper {
+    position: relative;
+    margin-top: 30px;
+}
+
+.tse-how-col {
+    position: relative;
+}
+
+.tse-card-flow {
+    position: relative;
+    background: #FFFFFF;
+    border: 1.5px solid #F1F5F9;
+    border-radius: 26px;
+    padding: 26px 20px 18px;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+    text-align: center;
     height: 100%;
     display: flex;
     flex-direction: column;
-    background: #FFFFFF;
-    border: 1.5px solid #EAEBED;
-    border-radius: 12px;
-    padding: 24px 20px 20px;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease;
 }
 
-.tp-how-card:hover {
-    transform: translateY(-5px);
-    border-color: var(--primary-color, #2073BF);
-    box-shadow: 0 12px 28px rgba(32, 115, 191, 0.1);
+.tse-card-flow:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 45px rgba(37, 99, 235, 0.12);
+    border-color: #CBD5E1;
 }
 
-.tp-how-card-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 18px;
+/* Step Pill Badges */
+.tse-card-pill-wrap {
+    margin-bottom: 14px;
 }
 
-.tp-how-step-tag {
-    font-family: var(--primary-font, "Jost", sans-serif);
-    font-size: 11px;
+.tse-pill-badge {
+    display: inline-block;
+    font-family: var(--primary-font, "Plus Jakarta Sans", sans-serif);
+    font-size: 12px;
     font-weight: 700;
-    color: var(--primary-color, #2073BF);
-    background: rgba(var(--primary-color-rgb, 32, 115, 191), 0.08);
-    padding: 4px 10px;
+    color: #FFFFFF;
+    padding: 5px 18px;
     border-radius: 20px;
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    text-transform: capitalize;
 }
 
-.tp-how-icon {
-    width: 44px;
-    height: 44px;
-    border-radius: 10px;
-    background: rgba(var(--primary-color-rgb, 32, 115, 191), 0.08);
-    color: var(--primary-color, #2073BF);
+.tse-pill-blue {
+    background: #2563EB;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.tse-pill-purple {
+    background: #8B5CF6;
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+}
+
+.tse-pill-green {
+    background: #10B981;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.tse-pill-orange {
+    background: #F97316;
+    box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+}
+
+/* Card Titles & Desc */
+.tse-card-title {
+    font-family: var(--primary-font, "Plus Jakarta Sans", sans-serif);
+    font-size: 19px;
+    font-weight: 800;
+    color: #0F172A;
+    margin-bottom: 6px;
+    letter-spacing: -0.01em;
+}
+
+.tse-card-desc {
+    font-family: var(--primary-font, "Plus Jakarta Sans", sans-serif);
+    font-size: 13.5px;
+    color: #64748B;
+    line-height: 1.48;
+    margin-bottom: 14px;
+    min-height: 42px;
+}
+
+/* Card Image Wrap */
+.tse-card-img-wrap {
+    margin-top: auto;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 18px;
-    transition: transform 0.3s ease;
+    height: 190px;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 18px;
+    background: transparent;
 }
 
-.tp-how-card:hover .tp-how-icon {
-    transform: scale(1.1);
-    background: var(--primary-color, #2073BF);
+.tse-card-step-img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    transition: transform 0.35s ease;
+}
+
+.tse-card-flow:hover .tse-card-step-img {
+    transform: scale(1.04);
+}
+
+/* Connecting Arrow Pill on Desktop */
+.tse-flow-arrow {
+    position: absolute;
+    top: 52%;
+    right: -17px;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #DBEAFE;
+    border: 2px solid #FFFFFF;
+    color: #2563EB;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    z-index: 10;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.18);
+    transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.tse-how-col:hover .tse-flow-arrow {
+    transform: translateY(-50%) scale(1.1);
+    background: #2563EB;
     color: #FFFFFF;
 }
 
-.tp-how-card-content {
-    flex-grow: 1;
+@media (max-width: 991px) {
+    .tse-flow-arrow {
+        display: none !important;
+    }
 }
 
-.tp-how-card-title {
-    font-family: var(--heading-font);
+/* Bottom Feature Strip (Matching Reference Image) */
+.tse-how-features-bar {
+    background: #FFFFFF;
+    border: 1.5px solid #E2E8F0;
+    border-radius: 50px;
+    padding: 14px 34px;
+    box-shadow: 0 6px 24px rgba(15, 23, 42, 0.04);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.tse-how-feature-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.tse-feat-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 17px;
-    font-weight: 600;
-    color: #10243C;
-    margin-bottom: 8px;
+    color: #2563EB;
+    background: #EFF6FF;
+    border: 1px solid #DBEAFE;
+    flex-shrink: 0;
+}
+
+.tse-feat-label {
+    font-family: var(--primary-font, "Plus Jakarta Sans", sans-serif);
+    font-size: 13.5px;
+    color: #475569;
     line-height: 1.35;
 }
 
-.tp-how-card-text {
-    font-family: var(--primary-font, "Jost", sans-serif);
-    font-size: 13.5px;
-    color: #777A7D;
-    line-height: 1.6;
-    margin-bottom: 16px;
+.tse-feat-label strong {
+    color: #0F172A;
+    font-weight: 700;
 }
 
-.tp-how-card-foot {
-    margin-top: auto;
-    padding-top: 12px;
-    border-top: 1px dashed #EAEBED;
-}
-
-.tp-how-foot-badge {
-    font-family: var(--primary-font, "Jost", sans-serif);
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--primary-color, #2073BF);
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.tp-how-foot-badge i {
-    font-size: 12px;
-}
-
-/* Action Box */
-.tp-how-action-box {
-    background: #FFFFFF;
-    border: 1.5px solid #EAEBED;
-    border-radius: 12px;
-    padding: 20px 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
-}
-
-.tp-how-action-info {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-}
-
-.tp-how-action-icon {
-    width: 44px;
-    height: 44px;
-    border-radius: 10px;
-    background: rgba(var(--primary-color-rgb, 32, 115, 191), 0.08);
-    color: var(--primary-color, #2073BF);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    flex-shrink: 0;
-}
-
-.tp-how-action-title {
-    font-family: var(--primary-font, "Jost", sans-serif);
-    font-size: 16px;
-    font-weight: 600;
-    color: #10243C;
-    margin-bottom: 2px;
-}
-
-.tp-how-action-text {
-    font-family: var(--primary-font, "Jost", sans-serif);
-    font-size: 13px;
-    color: #777A7D;
-    margin-bottom: 0;
-}
-
-.tp-how-action-btns {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-shrink: 0;
-}
-
-.tp-how-btn-primary {
-    font-family: var(--primary-font, "Jost", sans-serif);
-    font-size: 13.5px;
-    font-weight: 600;
-    color: #FFFFFF;
-    background: var(--primary-color, #2073BF);
-    border: none;
-    border-radius: 8px;
-    padding: 10px 18px;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-    transition: all 0.25s ease;
-}
-
-.tp-how-btn-primary:hover {
-    background: #185EA0;
-    color: #FFFFFF;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(32, 115, 191, 0.25);
-}
-
-.tp-how-btn-secondary {
-    font-family: var(--primary-font, "Jost", sans-serif);
-    font-size: 13.5px;
-    font-weight: 600;
-    color: #10243C;
-    background: #FFFFFF;
-    border: 1.5px solid #D0DCE8;
-    border-radius: 8px;
-    padding: 10px 18px;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none !important;
-    transition: all 0.25s ease;
-}
-
-.tp-how-btn-secondary:hover {
-    border-color: #25D366;
-    color: #25D366;
-    transform: translateY(-2px);
+.tse-how-feature-divider {
+    width: 1px;
+    height: 30px;
+    background: #CBD5E1;
 }
 
 /* Mobile & Tablet Responsiveness */
 @media (max-width: 991px) {
-    .tp-how-it-works-area {
-        padding-top: 40px;
-        padding-bottom: 40px;
+    .tse-how-it-works-section {
+        padding: 50px 0 45px;
     }
-    .tp-how-action-box {
+    .tse-how-main-title {
+        font-size: 32px;
+    }
+    .tse-how-tagline {
+        font-size: 18px;
+    }
+    .tse-how-features-bar {
         flex-direction: column;
-        text-align: center;
-        padding: 20px;
+        border-radius: 20px;
+        padding: 22px 20px;
+        gap: 14px;
     }
-    .tp-how-action-info {
-        flex-direction: column;
-        text-align: center;
-    }
-    .tp-how-action-btns {
+    .tse-how-feature-divider {
         width: 100%;
-        justify-content: center;
-        flex-wrap: wrap;
+        height: 1px;
+    }
+    .tse-how-feature-item {
+        width: 100%;
+        justify-content: flex-start;
+    }
+    .tse-card-img-wrap {
+        height: 165px;
     }
 }
 
 @media (max-width: 575px) {
-    .tp-how-it-works-area {
-        padding-top: 30px;
-        padding-bottom: 30px;
+    .tse-how-it-works-section {
+        padding: 40px 0 35px;
     }
-    .tp-how-card {
-        padding: 20px 16px;
+    .tse-how-main-title {
+        font-size: 26px;
     }
-    .tp-how-action-btns button,
-    .tp-how-action-btns a {
-        width: 100%;
-        justify-content: center;
+    .tse-how-tagline {
+        font-size: 16px;
     }
-}
-/* ==========================================================================
-   HOW IT WORKS - NATIVE NINICO UNIFIED DESIGN
-   ========================================================================== */
-.tse-how-it-works-section {
-    background-color: #F8F9FA;
-    border-top: 1px solid var(--tp-border-1, #EAEBED);
-    border-bottom: 1px solid var(--tp-border-1, #EAEBED);
+    .tse-card-desc {
+        min-height: auto;
+    }
 }
 
-.tse-how-sub-title {
+
+/* ==========================================================================
+   PRODUCTS SHOWCASE - EXACT MATCHING COUPLE STATUE MOCKUP
+   ========================================================================== */
+.tse-products-showcase-section {
+    position: relative;
+    padding: 70px 0 65px;
+    background-color: #FFFFFF;
+    overflow: hidden;
+}
+
+/* Ambient Corner Accents matching reference */
+.tse-prod-ambient {
+    position: absolute;
+    pointer-events: none;
+    border-radius: 50%;
+    filter: blur(85px);
+    opacity: 0.6;
+    z-index: 1;
+}
+
+.tse-ambient-top-left {
+    top: -80px;
+    left: -80px;
+    width: 380px;
+    height: 380px;
+    background: radial-gradient(circle, rgba(254, 243, 199, 0.9) 0%, rgba(253, 230, 138, 0.4) 50%, transparent 100%);
+}
+
+.tse-ambient-top-right {
+    top: -70px;
+    right: -70px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(219, 234, 254, 0.85) 0%, rgba(191, 219, 254, 0.35) 60%, transparent 100%);
+}
+
+.tse-ambient-bottom-right {
+    bottom: -90px;
+    right: -90px;
+    width: 440px;
+    height: 440px;
+    background: radial-gradient(circle, rgba(237, 233, 254, 0.8) 0%, rgba(221, 214, 254, 0.3) 65%, transparent 100%);
+}
+
+/* Header Elements */
+.tse-prod-pill-badge {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    font-family: var(--primary-font, "Jost", sans-serif);
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--primary-color, #2073BF);
-    background: rgba(var(--primary-color-rgb, 32, 115, 191), 0.08);
-    padding: 4px 14px;
-    border-radius: 20px;
-    letter-spacing: 1.5px;
+    border: 1.5px solid #F59E0B;
+    background: rgba(245, 158, 11, 0.08);
+    color: #D97706;
+    font-family: var(--primary-font, "Plus Jakarta Sans", sans-serif);
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
+    padding: 5px 18px;
+    border-radius: 30px;
 }
 
-.tse-how-sub-title i {
-    font-size: 11px;
+.tse-prod-heading {
+    font-family: var(--heading-font, "Playfair Display", Georgia, serif);
+    font-size: 42px;
+    font-weight: 700;
+    color: #10243C;
+    letter-spacing: -0.015em;
+    line-height: 1.22;
+    margin-bottom: 8px;
 }
 
-.tse-how-desc {
-    font-family: var(--primary-font, "Jost", sans-serif);
-    font-size: 15px;
-    color: #777A7D;
-    line-height: 1.6;
-    max-width: 620px;
-    margin: 8px auto 0;
+.tse-prod-heading span,
+.tse-text-blue {
+    color: #2073BF !important;
 }
 
-/* Connecting Line across steps on Desktop */
-.tse-how-steps-row {
-    position: relative;
+.tse-prod-subheading {
+    font-family: var(--primary-font, "Plus Jakarta Sans", sans-serif);
+    font-size: 15.5px;
+    color: #5A6E85;
+    margin-bottom: 12px;
 }
 
-@media (min-width: 992px) {
-    .tse-how-steps-row::before {
-        content: "";
-        position: absolute;
-        top: 48px;
-        left: 14%;
-        right: 14%;
-        height: 2px;
-        border-top: 2px dashed #D6DFE8;
-        z-index: 1;
-    }
+.tse-prod-accent-bar {
+    width: 52px;
+    height: 4px;
+    background: linear-gradient(90deg, #F59E0B 0%, #2073BF 100%);
+    border-radius: 4px;
+    margin: 0 auto;
 }
 
-/* Step Cards */
-.tse-how-step-card {
-    position: relative;
-    z-index: 2;
-    height: 100%;
+/* Product Card Component */
+.tse-prod-card {
     background: #FFFFFF;
-    border: 1px solid var(--tp-border-1, #EAEBED);
-    border-radius: 12px;
-    padding: 26px 22px 24px;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
-    transition: all 0.3s ease;
+    border: 1.5px solid #F1F5F9;
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+    overflow: hidden;
     display: flex;
     flex-direction: column;
+    height: 100%;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease;
 }
 
-.tse-how-step-card:hover {
-    transform: translateY(-4px);
-    border-color: var(--primary-color, #2073BF);
-    box-shadow: 0 10px 24px rgba(32, 115, 191, 0.1);
+.tse-prod-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 45px rgba(32, 115, 191, 0.12);
+    border-color: #CBD5E1;
 }
 
-.tse-how-card-top {
+/* Card Image Box */
+.tse-prod-thumb-wrap {
+    position: relative;
+    width: 100%;
+    height: 255px;
+    background: #F8FAFD;
+    overflow: hidden;
+}
+
+.tse-prod-img-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.tse-prod-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    transition: transform 0.45s ease;
+}
+
+.tse-prod-card:hover .tse-prod-card-img {
+    transform: scale(1.05);
+}
+
+/* Badges on Image */
+.tse-prod-badge-list {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    z-index: 5;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 18px;
+    flex-direction: column;
+    gap: 6px;
+    pointer-events: none;
 }
 
-.tse-step-tag {
-    font-family: var(--primary-font, "Jost", sans-serif);
+.tse-prod-badge {
+    font-family: var(--primary-font, "Plus Jakarta Sans", sans-serif);
     font-size: 11px;
     font-weight: 700;
-    color: var(--primary-color, #2073BF);
-    background: rgba(var(--primary-color-rgb, 32, 115, 191), 0.08);
-    padding: 4px 10px;
-    border-radius: 4px;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
+    color: #FFFFFF;
+    padding: 4px 12px;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    letter-spacing: 0.02em;
 }
 
-.tse-step-icon {
-    width: 44px;
-    height: 44px;
-    border-radius: 10px;
-    background: rgba(var(--primary-color-rgb, 32, 115, 191), 0.08);
-    color: var(--primary-color, #2073BF);
+.tse-badge-blue {
+    background: #2563EB;
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+}
+
+.tse-badge-green {
+    background: #10B981;
+    box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
+}
+
+.tse-badge-orange {
+    background: #F97316;
+    box-shadow: 0 4px 10px rgba(249, 115, 22, 0.3);
+}
+
+.tse-badge-red {
+    background: #EF4444;
+}
+
+/* Wishlist Button */
+.tse-prod-wishlist-btn {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 5;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    color: #1E293B;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 18px;
-    transition: all 0.3s ease;
+    font-size: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: all 0.25s ease;
+    text-decoration: none !important;
 }
 
-.tse-how-step-card:hover .tse-step-icon {
-    background: var(--primary-color, #2073BF);
-    color: #FFFFFF;
+.tse-prod-wishlist-btn:hover {
+    background: #FFF1F2;
+    color: #E11D48;
+    border-color: #FECDD3;
+    transform: scale(1.1);
 }
 
-.tse-step-name {
-    font-family: var(--primary-font, "Jost", sans-serif);
+/* Card Body */
+.tse-prod-card-body {
+    padding: 18px 18px 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+/* Star Rating */
+.tse-prod-rating-strip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 8px;
+}
+
+.tse-prod-stars {
+    color: #F59E0B;
+    font-size: 12.5px;
+    display: flex;
+    gap: 2px;
+}
+
+.tse-prod-rating-num {
+    font-family: var(--primary-font, "Plus Jakarta Sans", sans-serif);
+    font-size: 12.5px;
+    color: #64748B;
+    font-weight: 500;
+}
+
+/* Product Title */
+.tse-prod-card-title {
+    font-family: var(--primary-font, "Plus Jakarta Sans", sans-serif);
     font-size: 17px;
-    font-weight: 600;
-    color: var(--tp-text-body, #10243C);
+    font-weight: 700;
+    color: #0F172A;
     margin-bottom: 8px;
     line-height: 1.3;
 }
 
-.tse-step-text {
-    font-family: var(--primary-font, "Jost", sans-serif);
-    font-size: 13.5px;
-    color: #777A7D;
-    line-height: 1.6;
-    margin-bottom: 0;
+.tse-prod-card-title a {
+    color: #0F172A;
+    text-decoration: none;
+    transition: color 0.2s ease;
 }
 
-/* Action Box */
-.tse-how-action-box {
+.tse-prod-card-title a:hover {
+    color: #2073BF;
+}
+
+/* Price Box */
+.tse-prod-price-box {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    margin-bottom: 16px;
+}
+
+.tse-price-from-label {
+    font-family: var(--primary-font, "Plus Jakarta Sans", sans-serif);
+    font-size: 13.5px;
+    color: #64748B;
+    font-weight: 500;
+}
+
+.tse-price-amount {
+    font-family: var(--primary-font, "Plus Jakarta Sans", sans-serif);
+    font-size: 21px;
+    font-weight: 800;
+    color: #2073BF;
+    letter-spacing: -0.01em;
+}
+
+.tse-price-old-amount {
+    font-family: var(--primary-font, "Plus Jakarta Sans", sans-serif);
+    font-size: 14px;
+    color: #94A3B8;
+    text-decoration: line-through;
+}
+
+/* Actions */
+.tse-prod-card-actions {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.tse-btn-wa-order {
+    flex-grow: 1;
+    background: #0F2942;
+    color: #FFFFFF;
+    font-family: var(--primary-font, "Plus Jakarta Sans", sans-serif);
+    font-size: 12.5px;
+    font-weight: 700;
+    padding: 10px 14px;
+    border-radius: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-decoration: none !important;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 12px rgba(15, 41, 66, 0.15);
+}
+
+.tse-btn-wa-order:hover {
+    background: #185EA0;
+    color: #FFFFFF;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(24, 94, 160, 0.25);
+}
+
+.tse-btn-wa-order.tse-btn-wa-full {
+    width: 100%;
+}
+
+.tse-btn-wa-order i.fa-whatsapp {
+    color: #25D366;
+    font-size: 16px;
+}
+
+.tse-btn-wa-arrow {
+    font-size: 10px;
+    margin-left: 2px;
+}
+
+.tse-btn-cart-square {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    border: 1.5px solid #2073BF;
+    color: #2073BF;
+    background: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    text-decoration: none !important;
+    transition: all 0.25s ease;
+    flex-shrink: 0;
+}
+
+.tse-btn-cart-square:hover {
+    background: #2073BF;
+    color: #FFFFFF;
+    transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+    .tse-products-showcase-section {
+        padding: 50px 0 45px;
+    }
+    .tse-prod-heading {
+        font-size: 32px;
+    }
+    .tse-prod-thumb-wrap {
+        height: 230px;
+    }
+}
+
+@media (max-width: 575px) {
+    .tse-products-showcase-section {
+        padding: 40px 0 35px;
+    }
+    .tse-prod-heading {
+        font-size: 26px;
+    }
+    .tse-prod-thumb-wrap {
+        height: 220px;
+    }
+    .tse-prod-card-body {
+        padding: 14px 14px 16px;
+    }
+    .tse-btn-wa-order {
+        font-size: 11.5px;
+        padding: 9px 10px;
+        gap: 6px;
+    }
+    .tse-btn-cart-square {
+        width: 38px;
+        height: 38px;
+    }
+}
+
+.tse-prod-wishlist-touch {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 6;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    background: transparent;
+    transition: transform 0.2s ease;
+}
+.tse-prod-wishlist-touch:hover {
+    transform: scale(1.15);
+}
+
+
+/* ==========================================================================
+   FREQUENTLY ASKED QUESTIONS (FAQ) SECTION - ENLARGED FONTS & LUXURY DESIGN
+   ========================================================================== */
+.tse-faq-section {
+    position: relative;
+    overflow: hidden;
+    background: #FFFFFF;
+    padding: 75px 0 90px;
+}
+
+.tse-faq-ambient {
+    position: absolute;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.tse-faq-ambient-top-left {
+    top: 0;
+    left: 0;
+    width: 380px;
+    height: 380px;
+    background: radial-gradient(circle at 0% 0%, rgba(245, 179, 66, 0.22) 0%, rgba(245, 179, 66, 0.05) 50%, transparent 75%);
+    border-bottom-right-radius: 100%;
+}
+
+.tse-faq-ambient-bottom-right {
+    bottom: 0;
+    right: 0;
+    width: 440px;
+    height: 440px;
+    background: radial-gradient(circle at 100% 100%, rgba(30, 111, 217, 0.16) 0%, rgba(245, 179, 66, 0.12) 45%, transparent 75%);
+    border-top-left-radius: 100%;
+}
+
+.tse-faq-pill-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 22px;
+    border-radius: 50px;
+    background: #FFF7ED;
+    border: 1.5px solid #FCD34D;
+    font-size: 14px;
+    font-weight: 700;
+    color: #D97706;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.tse-faq-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: 46px; /* Big Font */
+    font-weight: 700;
+    color: #0F2942;
+    line-height: 1.25;
+    margin-bottom: 12px;
+}
+
+.tse-faq-heading .tse-text-blue {
+    color: #1E6FD9;
+}
+
+.tse-faq-subheading {
+    font-family: 'Plus Jakarta Sans', 'Jost', sans-serif;
+    font-size: 19px; /* Big Font */
+    font-weight: 500;
+    color: #4B5563;
+    margin-bottom: 18px;
+}
+
+.tse-faq-accent-bar {
+    width: 75px;
+    height: 4px;
+    border-radius: 4px;
+    margin: 0 auto;
+    background: linear-gradient(90deg, #EAA844 0%, #EAA844 50%, #1E6FD9 50%, #1E6FD9 100%);
+}
+
+/* Left Column Showcase */
+.tse-faq-left-showcase {
+    position: sticky;
+    top: 90px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.tse-faq-visual-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    background: #FFFFFF;
+    border-radius: 20px;
+    padding: 22px 18px;
+    border: 1.5px solid #EEF2F6;
+    box-shadow: 0 10px 30px rgba(15, 41, 66, 0.04);
+}
+
+.tse-faq-statue-side {
+    position: relative;
+    flex: 0 0 52%;
+    max-width: 52%;
+    text-align: center;
+}
+
+.tse-faq-statue-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(30, 111, 217, 0.12) 0%, rgba(30, 111, 217, 0) 70%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.tse-faq-statue-img {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-height: 310px;
+    object-fit: contain;
+    filter: drop-shadow(0 12px 24px rgba(15, 41, 66, 0.12));
+}
+
+.tse-faq-badges-side {
+    flex: 0 0 46%;
+    max-width: 46%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.tse-faq-badge-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #FFFFFF;
+    border: 1.5px solid #E2E8F0;
+    border-radius: 50px;
+    padding: 10px 14px;
+    box-shadow: 0 4px 12px rgba(15, 41, 66, 0.04);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    text-align: left;
+}
+
+.tse-faq-badge-item:hover {
+    transform: translateY(-2px);
+    border-color: #1E6FD9;
+    box-shadow: 0 8px 18px rgba(30, 111, 217, 0.12);
+}
+
+.tse-faq-badge-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #EFF6FF;
+    color: #1E6FD9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+}
+
+.tse-faq-badge-text {
+    font-family: 'Plus Jakarta Sans', 'Jost', sans-serif;
+    font-size: 14.5px;
+    font-weight: 700;
+    color: #0F2942;
+    line-height: 1.25;
+}
+
+/* WhatsApp Support Box */
+.tse-faq-wa-help-card {
+    background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%);
+    border: 1.5px solid #BBF7D0;
+    border-radius: 18px;
+    padding: 20px 22px;
+    box-shadow: 0 6px 18px rgba(34, 197, 94, 0.08);
+}
+
+.tse-faq-wa-help-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #166534;
+    margin-bottom: 5px;
+}
+
+.tse-faq-wa-help-desc {
+    font-size: 14px;
+    color: #15803D;
+    margin-bottom: 14px;
+    line-height: 1.45;
+}
+
+.tse-faq-wa-help-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 12px 20px;
+    border-radius: 50px;
+    background: #25D366;
+    color: #FFFFFF !important;
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(37, 211, 102, 0.28);
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.tse-faq-wa-help-btn:hover {
+    background: #1EBE5D;
+    transform: translateY(-2px);
+    color: #FFFFFF !important;
+}
+
+/* Accordion Component */
+.tse-faq-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+}
+
+.tse-faq-item {
+    background: #FFFFFF;
+    border: 1.5px solid #E2E8F0 !important;
+    border-radius: 14px !important;
+    overflow: hidden;
+    box-shadow: 0 3px 8px rgba(15, 41, 66, 0.03);
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.tse-faq-item:hover {
+    border-color: #CBD5E1 !important;
+    box-shadow: 0 6px 16px rgba(15, 41, 66, 0.06);
+}
+
+.tse-faq-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 18px 24px;
+    background: #FFFFFF;
+    border: none;
+    box-shadow: none !important;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.25s ease;
+}
+
+.tse-faq-btn::after {
+    display: none !important;
+}
+
+.tse-faq-icon-wrap {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: #EFF6FF;
+    color: #1E6FD9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 19px;
+    flex-shrink: 0;
+    transition: all 0.25s ease;
+}
+
+.tse-faq-q-text {
+    flex: 1;
+    font-family: 'Plus Jakarta Sans', 'Jost', sans-serif;
+    font-size: 18.5px; /* Increased / Big Font */
+    font-weight: 700;
+    color: #0F2942;
+    line-height: 1.45;
+    transition: color 0.25s ease;
+}
+
+.tse-faq-arrow {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1E6FD9;
+    font-size: 15px;
+    flex-shrink: 0;
+    transition: transform 0.3s ease, color 0.25s ease;
+}
+
+/* Active / Expanded Header State (Navy/Royal Blue Gradient matching mockup) */
+.tse-faq-btn:not(.collapsed) {
+    background: linear-gradient(135deg, #0A3A6E 0%, #0F4C8A 100%) !important;
+    color: #FFFFFF !important;
+}
+
+.tse-faq-btn:not(.collapsed) .tse-faq-q-text {
+    color: #FFFFFF !important;
+    font-size: 19px;
+}
+
+.tse-faq-btn:not(.collapsed) .tse-faq-icon-wrap {
+    background: rgba(255, 255, 255, 0.18) !important;
+    color: #FFFFFF !important;
+}
+
+.tse-faq-btn:not(.collapsed) .tse-faq-arrow {
+    transform: rotate(180deg);
+    color: #FFFFFF !important;
+}
+
+/* Answer Body Styling (Increased / Big Font) */
+.tse-faq-body {
+    padding: 24px 28px 28px;
+    background: #FFFFFF;
+    border-top: 1px solid #E2E8F0;
+}
+
+.tse-faq-a-text {
+    font-family: 'Plus Jakarta Sans', 'Jost', sans-serif;
+    font-size: 16.5px; /* Increased / Big Font */
+    line-height: 1.8;
+    color: #374151;
+    margin: 0;
+}
+
+@media (max-width: 991px) {
+    .tse-faq-section {
+        padding: 55px 0 65px;
+    }
+    .tse-faq-heading {
+        font-size: 36px;
+    }
+    .tse-faq-subheading {
+        font-size: 17px;
+    }
+    .tse-faq-left-showcase {
+        position: static;
+        margin-bottom: 35px;
+    }
+    .tse-faq-statue-side {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+    .tse-faq-badges-side {
+        flex: 0 0 48%;
+        max-width: 48%;
+    }
+    .tse-faq-q-text {
+        font-size: 17.5px;
+    }
+    .tse-faq-a-text {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 575px) {
+    .tse-faq-section {
+        padding: 42px 0 50px;
+    }
+    .tse-faq-heading {
+        font-size: 28px;
+    }
+    .tse-faq-subheading {
+        font-size: 15.5px;
+    }
+    .tse-faq-visual-row {
+        flex-direction: column;
+        padding: 20px 14px;
+        gap: 16px;
+    }
+    .tse-faq-statue-side {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    .tse-faq-statue-img {
+        max-height: 240px;
+    }
+    .tse-faq-badges-side {
+        flex: 0 0 100%;
+        max-width: 100%;
+        width: 100%;
+    }
+    .tse-faq-btn {
+        padding: 15px 16px;
+        gap: 12px;
+    }
+    .tse-faq-icon-wrap {
+        width: 38px;
+        height: 38px;
+        font-size: 16px;
+    }
+    .tse-faq-q-text {
+        font-size: 16.5px;
+    }
+    .tse-faq-body {
+        padding: 18px 18px 22px;
+    }
+    .tse-faq-a-text {
+        font-size: 15.5px;
+        line-height: 1.65;
+    }
+    .tse-faq-badge-item {
+        padding: 10px 16px;
+        gap: 12px;
+    }
+    .tse-faq-badge-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+    }
+    .tse-faq-badge-text {
+        font-size: 14.5px;
+    }
+}
+
+
+/* ==========================================================================
+   CUSTOM IDEA BANNER - EXACT MOCKUP MATCH
+   ========================================================================== */
+.tse-custom-banner-section {
+    position: relative;
+    padding: 35px 0 25px;
+    background: #FFFFFF;
+}
+
+.tse-custom-banner-card {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #F8FAFD 0%, #FFFFFF 50%, #F1F6FD 100%);
+    border: 1.5px solid #DCEAF7;
+    border-radius: 28px;
+    padding: 24px 34px;
+    box-shadow: 0 10px 30px rgba(15, 41, 66, 0.05);
+}
+
+.tse-banner-ambient {
+    position: absolute;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.tse-banner-ambient-tl {
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 160px;
+    background: radial-gradient(circle at 0% 0%, rgba(245, 179, 66, 0.22) 0%, rgba(30, 111, 217, 0.1) 45%, transparent 75%);
+    border-bottom-right-radius: 100%;
+}
+
+.tse-banner-ambient-br {
+    bottom: 0;
+    right: 0;
+    width: 320px;
+    height: 160px;
+    background: radial-gradient(circle at 100% 100%, rgba(245, 179, 66, 0.24) 0%, rgba(30, 111, 217, 0.12) 40%, transparent 75%);
+    border-top-left-radius: 100%;
+}
+
+.tse-banner-statue-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tse-banner-statue-img {
+    max-height: 245px;
+    width: 100%;
+    max-width: 320px;
+    object-fit: contain;
+    border-radius: 18px;
+    filter: drop-shadow(0 10px 20px rgba(15, 41, 66, 0.12));
+    transition: transform 0.3s ease;
+}
+
+.tse-custom-banner-card:hover .tse-banner-statue-img {
+    transform: scale(1.02);
+}
+
+.tse-banner-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: #0F2942;
+    margin-bottom: 8px;
+    line-height: 1.25;
+}
+
+.tse-banner-title-accent {
+    position: relative;
+    color: #F59E0B;
+    display: inline-block;
+}
+
+.tse-banner-rays {
+    position: absolute;
+    top: -12px;
+    right: -10px;
+    width: 20px;
+    height: 12px;
+    display: inline-block;
+}
+
+.tse-banner-rays::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 8px;
+    width: 2.5px;
+    height: 8px;
+    background: #F59E0B;
+    border-radius: 2px;
+}
+
+.tse-banner-rays::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 2.5px;
+    height: 7px;
+    background: #F59E0B;
+    border-radius: 2px;
+    transform: rotate(-35deg);
+    box-shadow: 10px 3px 0 0 #F59E0B;
+}
+
+.tse-banner-desc {
+    font-family: 'Plus Jakarta Sans', 'Jost', sans-serif;
+    font-size: 16.5px;
+    font-weight: 500;
+    color: #374151;
+    line-height: 1.5;
+    margin-bottom: 18px;
+}
+
+.tse-banner-steps-row {
     display: inline-flex;
     align-items: center;
     gap: 16px;
     background: #FFFFFF;
-    border: 1px solid var(--tp-border-1, #EAEBED);
-    border-radius: 30px;
-    padding: 8px 10px 8px 22px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    border: 1.5px solid #E2E8F0;
+    border-radius: 16px;
+    padding: 10px 18px;
+    box-shadow: 0 4px 12px rgba(15, 41, 66, 0.03);
 }
 
-.tse-how-action-text {
-    font-family: var(--primary-font, "Jost", sans-serif);
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--tp-text-body, #10243C);
+.tse-banner-step-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-.tse-how-action-btns {
+.tse-banner-step-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: #EFF6FF;
+    border: 1.5px solid #BFDBFE;
+    color: #1E6FD9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    flex-shrink: 0;
+}
+
+.tse-banner-step-text {
+    font-family: 'Plus Jakarta Sans', 'Jost', sans-serif;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #0F2942;
+    line-height: 1.25;
+    text-align: left;
+}
+
+.tse-banner-step-divider {
+    width: 1px;
+    height: 32px;
+    background: #E2E8F0;
+}
+
+/* Button with text on left, arrow middle, WhatsApp on right */
+.tse-banner-wa-btn-v2 {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-}
-
-.tse-btn-preview {
-    font-family: var(--primary-font, "Jost", sans-serif);
-    font-size: 13px;
-    font-weight: 600;
-    color: #FFFFFF;
-    background: var(--primary-color, #2073BF);
-    border: none;
-    border-radius: 20px;
-    padding: 8px 18px;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    cursor: pointer;
-    transition: all 0.25s ease;
-}
-
-.tse-btn-preview:hover {
-    background: #185ea0;
-}
-
-.tse-btn-whatsapp {
-    font-family: var(--primary-font, "Jost", sans-serif);
-    font-size: 13px;
-    font-weight: 600;
-    color: #128C7E;
-    background: rgba(37, 211, 102, 0.12);
-    border: 1px solid rgba(37, 211, 102, 0.25);
-    border-radius: 20px;
-    padding: 7px 18px;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
+    justify-content: center;
+    gap: 12px;
+    padding: 10px 12px 10px 24px;
+    border-radius: 50px;
+    background: linear-gradient(135deg, #0056D2 0%, #0044B2 100%);
+    color: #FFFFFF !important;
     text-decoration: none !important;
+    box-shadow: 0 8px 24px rgba(0, 86, 210, 0.35);
     transition: all 0.25s ease;
 }
 
-.tse-btn-whatsapp:hover {
-    background: #25D366;
-    color: #FFFFFF;
+.tse-banner-wa-btn-v2:hover {
+    background: linear-gradient(135deg, #0047B3 0%, #00368C 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(0, 86, 210, 0.45);
+    color: #FFFFFF !important;
 }
 
-@media (max-width: 767px) {
-    .tse-how-action-box {
+.tse-banner-wa-label-v2 {
+    font-family: 'Plus Jakarta Sans', 'Jost', sans-serif;
+    font-size: 14.5px;
+    font-weight: 700;
+    color: #FFFFFF;
+    line-height: 1.25;
+    text-align: left;
+}
+
+.tse-banner-wa-arrow-v2 {
+    color: #FFFFFF;
+    font-size: 14px;
+    transition: transform 0.2s ease;
+    margin-right: 2px;
+}
+
+.tse-banner-wa-btn-v2:hover .tse-banner-wa-arrow-v2 {
+    transform: translateX(3px);
+}
+
+.tse-banner-wa-badge-v2 {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #25D366;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    font-size: 20px;
+    flex-shrink: 0;
+    box-shadow: 0 3px 10px rgba(37, 211, 102, 0.4);
+}
+
+@media (max-width: 991px) {
+    .tse-custom-banner-card {
+        padding: 22px 20px;
+    }
+    .tse-banner-title {
+        font-size: 28px;
+    }
+    .tse-banner-desc {
+        font-size: 15px;
+    }
+    .tse-banner-statue-img {
+        max-height: 200px;
+    }
+    .tse-banner-steps-row {
+        gap: 10px;
+        padding: 8px 14px;
+    }
+    .tse-banner-step-text {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 575px) {
+    .tse-custom-banner-section {
+        padding: 25px 0 15px;
+    }
+    .tse-custom-banner-card {
+        padding: 20px 16px;
+        border-radius: 20px;
+    }
+    .tse-banner-title {
+        font-size: 25px;
+        text-align: center;
+    }
+    .tse-banner-desc {
+        font-size: 14.5px;
+        text-align: center;
+    }
+    .tse-banner-steps-row {
+        display: flex;
         flex-direction: column;
-        border-radius: 12px;
-        padding: 16px 14px;
+        align-items: flex-start;
         width: 100%;
         gap: 12px;
+        padding: 14px 16px;
     }
-    .tse-how-action-btns {
-        width: 100%;
-        flex-direction: column;
+    .tse-banner-step-divider {
+        display: none;
     }
-    .tse-btn-preview,
-    .tse-btn-whatsapp {
+    .tse-banner-step-text br {
+        display: none;
+    }
+    .tse-banner-wa-btn-v2 {
         width: 100%;
-        justify-content: center;
+        padding: 10px 12px 10px 18px;
+        justify-content: space-between;
     }
 }

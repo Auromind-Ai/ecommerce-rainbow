@@ -20,28 +20,11 @@
                     <div class="header-meta-info d-flex align-items-center justify-content-between">
                         {!! Theme::get('headerSearchBar') !!}
                         <div class="header-meta__social d-flex align-items-center ml-25">
-                            @if(EcommerceHelper::isCartEnabled())
-                                <button class="header-cart p-relative tp-cart-toggle" title="{{ __('Cart') }}">
-                                    <i class="fal fa-shopping-bag"></i>
-                                    <span class="tp-product-count">{{ Cart::instance('cart')->count() }}</span>
-                                </button>
-                            @endif
-
-                            @if(EcommerceHelper::isCompareEnabled())
-                                <a href="{{ route('public.compare') }}" class="header-cart p-relative">
-                                    <i class="fal fa-exchange"></i>
-                                    <span class="tp-product-compare-count">{{ Cart::instance('compare')->count() }}</span>
-                                </a>
-                            @endif
-
-                            @auth('customer')
-                                <a href="{{ route('customer.overview') }}" title="{{ auth('customer')->user()->name }}"><i class="fal fa-user"></i></a>
-                            @else
-                                <a href="{{ route('customer.login') }}" title="{{ __('Login') }}"><i class="fal fa-user"></i></a>
-                            @endauth
-
                             @if(EcommerceHelper::isWishlistEnabled())
-                                <a href="{{ route('public.wishlist') }}"><i class="fal fa-heart"></i></a>
+                                <a href="{{ route('public.wishlist') }}" class="header-cart p-relative" title="{{ __('Wishlist') }}">
+                                    <i class="fal fa-heart"></i>
+                                    <span class="tp-product-wishlist-count">{{ Cart::instance('wishlist')->count() }}</span>
+                                </a>
                             @endif
                         </div>
                     </div>
@@ -152,20 +135,8 @@
 
         @if (is_plugin_active('ecommerce'))
             <div class="tse-drawer-section tse-drawer-customer-section">
-                <span class="tse-drawer-subtitle">{{ __('Customer Account') }}</span>
+                <span class="tse-drawer-subtitle">{{ __('Quick Links') }}</span>
                 <div class="tse-drawer-action-links">
-                    @auth('customer')
-                        <a href="{{ route('customer.overview') }}" class="tse-drawer-action-item">
-                            <i class="fal fa-user-circle"></i>
-                            <span>{{ auth('customer')->user()->name }}</span>
-                        </a>
-                    @else
-                        <a href="{{ route('customer.login') }}" class="tse-drawer-action-item">
-                            <i class="fal fa-user"></i>
-                            <span>{{ __('Login / Register') }}</span>
-                        </a>
-                    @endauth
-
                     @if (EcommerceHelper::isOrderTrackingEnabled())
                         <a href="{{ route('public.orders.tracking') }}" class="tse-drawer-action-item">
                             <i class="fal fa-truck"></i>
@@ -177,13 +148,6 @@
                         <a href="{{ route('public.wishlist') }}" class="tse-drawer-action-item">
                             <i class="fal fa-heart"></i>
                             <span>{{ __('My Wishlist') }}</span>
-                        </a>
-                    @endif
-
-                    @if(EcommerceHelper::isCompareEnabled())
-                        <a href="{{ route('public.compare') }}" class="tse-drawer-action-item">
-                            <i class="fal fa-exchange"></i>
-                            <span>{{ __('Compare Products') }} ({{ Cart::instance('compare')->count() }})</span>
                         </a>
                     @endif
                 </div>

@@ -385,7 +385,7 @@
 
                     // WhatsApp link
                     var waText = encodeURI('Hi Rainbow Gallery! I used your AI Statue Preview and would like to order the handcrafted real statue! Preview URL: ' + window.location.origin + lastStatueUrl);
-                    btnWhatsApp.href = 'https://wa.me/919444390311?text=' + waText;
+                    btnWhatsApp.href = 'https://wa.me/91904777229?text=' + waText;
 
                     sculptingState.style.display = 'none';
                     resultCard.style.display = 'block';
