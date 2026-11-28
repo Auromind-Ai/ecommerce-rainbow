@@ -1,119 +1,138 @@
-<section class="tse-3d-process-section">
+<section class="tp-how-it-works-area pt-50 pb-50" id="how-it-works">
     <div class="container">
         <!-- Section Header -->
-        <div class="row justify-content-center text-center mb-35">
-            <div class="col-lg-8 col-md-10">
-                <div class="tse-3d-pill-badge mb-12">
-                    <i class="fas fa-magic"></i> ARTISAN CRAFTSMANSHIP JOURNEY
+        <div class="row justify-content-center text-center">
+            <div class="col-xl-8 col-lg-9 col-md-11">
+                <div class="tpsection mb-40">
+                    <span class="tp-how-subtitle">How It Works</span>
+                    <h2 class="tpsection__title">
+                        You send us your selfie, we create your <span>minime</span>
+                    </h2>
+                    <p class="tp-how-desc">
+                        The latest 3D printing technology and digital sculpting turn your photos into a miniature of you.
+                    </p>
                 </div>
-                <h2 class="tse-3d-section-title">
-                    From <span>2D Photo</span> to Handcrafted <span>3D Masterpiece</span>
-                </h2>
-                <p class="tse-3d-section-desc">
-                    We combine high-precision 3D digital sculpting with traditional fine-art casting and hand-painting to craft statues with uncanny personal likeness.
-                </p>
             </div>
         </div>
 
-        <!-- 4 Step Cards Grid -->
-        <div class="row g-3 g-md-4">
-            <!-- Step 1 -->
+        <!-- 4 Step Cards Flow -->
+        <div class="row g-3 g-lg-4 tp-how-steps-row mb-35">
+            <!-- Step 01 -->
             <div class="col-12 col-sm-6 col-lg-3">
-                <div class="tse-step-3d-card tse-3d-tilt">
-                    <div class="tse-step-num-badge">01</div>
-                    <div class="tse-step-icon-wrap">
-                        <i class="fas fa-camera-retro"></i>
+                <div class="tp-how-card">
+                    <div class="tp-how-card-top">
+                        <span class="tp-how-step-tag">Step 01</span>
+                        <div class="tp-how-icon">
+                            <i class="fas fa-camera"></i>
+                        </div>
                     </div>
-                    <h4 class="tse-step-title">Photo & AI Depth Scan</h4>
-                    <p class="tse-step-desc">
-                        Upload any clear smartphone photo. AI extracts 3D depth, posture, contours, and skin-tone nuances.
-                    </p>
-                    <div class="tse-step-tag">
-                        <i class="fas fa-check"></i> High-Accuracy Extraction
+                    <div class="tp-how-card-content">
+                        <h4 class="tp-how-card-title">Order Confirmation</h4>
+                        <p class="tp-how-card-text">
+                            Confirm your order by sending us good quality images.
+                        </p>
+                    </div>
+                    <div class="tp-how-card-foot">
+                        <span class="tp-how-foot-badge">
+                            <i class="fas fa-check-circle"></i> Clear Front Photos
+                        </span>
                     </div>
                 </div>
             </div>
 
-            <!-- Step 2 -->
+            <!-- Step 02 -->
             <div class="col-12 col-sm-6 col-lg-3">
-                <div class="tse-step-3d-card tse-3d-tilt">
-                    <div class="tse-step-num-badge">02</div>
-                    <div class="tse-step-icon-wrap">
-                        <i class="fas fa-cube"></i>
+                <div class="tp-how-card">
+                    <div class="tp-how-card-top">
+                        <span class="tp-how-step-tag">Step 02</span>
+                        <div class="tp-how-icon">
+                            <i class="fas fa-cube"></i>
+                        </div>
                     </div>
-                    <h4 class="tse-step-title">3D Digital Sculpting</h4>
-                    <p class="tse-step-desc">
-                        Master digital sculptors refine high-polygon mesh, facial expressions, attire folds, and hair curls.
-                    </p>
-                    <div class="tse-step-tag">
-                        <i class="fas fa-check"></i> 360° Customer Approval
+                    <div class="tp-how-card-content">
+                        <h4 class="tp-how-card-title">Designing</h4>
+                        <p class="tp-how-card-text">
+                            Our expert team will design your miniature and share the 3D first look with you.
+                        </p>
+                    </div>
+                    <div class="tp-how-card-foot">
+                        <span class="tp-how-foot-badge">
+                            <i class="fas fa-eye"></i> 3D First Look Approval
+                        </span>
                     </div>
                 </div>
             </div>
 
-            <!-- Step 3 -->
+            <!-- Step 03 -->
             <div class="col-12 col-sm-6 col-lg-3">
-                <div class="tse-step-3d-card tse-3d-tilt">
-                    <div class="tse-step-num-badge">03</div>
-                    <div class="tse-step-icon-wrap">
-                        <i class="fas fa-paint-brush"></i>
+                <div class="tp-how-card">
+                    <div class="tp-how-card-top">
+                        <span class="tp-how-step-tag">Step 03</span>
+                        <div class="tp-how-icon">
+                            <i class="fas fa-print"></i>
+                        </div>
                     </div>
-                    <h4 class="tse-step-title">Artisan Hand-Painting</h4>
-                    <p class="tse-step-desc">
-                        Cast in durable polyresin or bronze, then individually hand-painted with archival natural pigments.
-                    </p>
-                    <div class="tse-step-tag">
-                        <i class="fas fa-check"></i> Fine Brush Details
+                    <div class="tp-how-card-content">
+                        <h4 class="tp-how-card-title">3D Printing</h4>
+                        <p class="tp-how-card-text">
+                            With state-of-the-art technology, we print your realistic 3D model.
+                        </p>
+                    </div>
+                    <div class="tp-how-card-foot">
+                        <span class="tp-how-foot-badge">
+                            <i class="fas fa-layer-group"></i> State-of-the-Art Tech
+                        </span>
                     </div>
                 </div>
             </div>
 
-            <!-- Step 4 -->
+            <!-- Step 04 -->
             <div class="col-12 col-sm-6 col-lg-3">
-                <div class="tse-step-3d-card tse-3d-tilt">
-                    <div class="tse-step-num-badge">04</div>
-                    <div class="tse-step-icon-wrap">
-                        <i class="fas fa-gift"></i>
+                <div class="tp-how-card">
+                    <div class="tp-how-card-top">
+                        <span class="tp-how-step-tag">Step 04</span>
+                        <div class="tp-how-icon">
+                            <i class="fas fa-shipping-fast"></i>
+                        </div>
                     </div>
-                    <h4 class="tse-step-title">Keepsake Delivery</h4>
-                    <p class="tse-step-desc">
-                        Sealed in anti-UV lacquer and cushioned in a luxury velvet presentation case, delivered with care.
-                    </p>
-                    <div class="tse-step-tag">
-                        <i class="fas fa-check"></i> Insured Pan-India
+                    <div class="tp-how-card-content">
+                        <h4 class="tp-how-card-title">Shipping & Delivery</h4>
+                        <p class="tp-how-card-text">
+                            We provide global scale delivery: your minime reaches wherever you are.
+                        </p>
+                    </div>
+                    <div class="tp-how-card-foot">
+                        <span class="tp-how-foot-badge">
+                            <i class="fas fa-globe-americas"></i> Global Scale Delivery
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Clean Action Strip -->
+        <div class="row justify-content-center">
+            <div class="col-xl-9 col-lg-10 col-12">
+                <div class="tp-how-action-box">
+                    <div class="tp-how-action-info">
+                        <div class="tp-how-action-icon">
+                            <i class="fas fa-magic"></i>
+                        </div>
+                        <div>
+                            <h5 class="tp-how-action-title">Ready to see your minime preview before ordering?</h5>
+                            <p class="tp-how-action-text">Try our AI Statue Preview instantly or consult directly with our 3D artists.</p>
+                        </div>
+                    </div>
+                    <div class="tp-how-action-btns">
+                        <button type="button" class="tp-how-btn-primary" onclick="document.getElementById('tse-ai-bot-trigger')?.click();">
+                            <i class="fas fa-sparkles"></i> Try AI Preview
+                        </button>
+                        <a href="https://wa.me/918072124801?text=Hi%2C%20I%20want%20to%20order%20my%20custom%203D%20Minime%20statue!" target="_blank" rel="noopener noreferrer" class="tp-how-btn-secondary">
+                            <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-
-
-<script>
-(function() {
-    function init3DTiltCards() {
-        var cards = document.querySelectorAll('.tse-3d-tilt, .tse-3d-card');
-        cards.forEach(function(card) {
-            card.addEventListener('mousemove', function(e) {
-                var rect = card.getBoundingClientRect();
-                var x = e.clientX - rect.left;
-                var y = e.clientY - rect.top;
-                var cx = rect.width / 2;
-                var cy = rect.height / 2;
-                var rotX = ((y - cy) / cy) * -8;
-                var rotY = ((x - cx) / cx) * 8;
-                card.style.transform = 'perspective(1000px) rotateX(' + rotX.toFixed(2) + 'deg) rotateY(' + rotY.toFixed(2) + 'deg) scale3d(1.02, 1.02, 1.02)';
-            });
-            card.addEventListener('mouseleave', function() {
-                card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-            });
-        });
-    }
-
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', init3DTiltCards);
-    } else {
-        init3DTiltCards();
-    }
-})();
-</script>

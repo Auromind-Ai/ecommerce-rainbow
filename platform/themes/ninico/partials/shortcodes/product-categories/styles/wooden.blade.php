@@ -30,15 +30,15 @@
                         : null;
                 @endphp
                 <div class="col-6 col-md-6 col-lg-3">
-                    <div class="tse-cat-card tse-3d-card tse-3d-tilt">
-                        <span class="tse-cat-3d-badge"><i class="fas fa-cube"></i> 3D Custom</span>
+                    <div class="tse-cat-card">
                         <a href="{{ $category->url }}" class="tse-cat-card-link">
                             <div class="tse-cat-card-thumb">
                                 <picture>
                                     @if ($catWebpUrl)
                                         <source srcset="{{ $catWebpUrl }}?v={{ $catV }}" type="image/webp">
                                     @endif
-                                    <img src="{{ $catImgUrl }}?v={{ $catV }}" alt="{{ $category->name }}" loading="lazy" decoding="async">
+                                    <img src="{{ $catImgUrl }}?v={{ $catV }}" alt="{{ $category->name }}" loading="lazy"
+                                        decoding="async">
                                 </picture>
                             </div>
                             <div class="tse-cat-card-body">
@@ -55,5 +55,4 @@
     </div>
 </section>
 
-{!! Theme::partial('home-3d-studio') !!}
 {!! Theme::partial('home-3d-process') !!}

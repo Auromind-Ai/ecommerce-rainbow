@@ -37,6 +37,10 @@ app()->booted(function () {
     ThemeSupport::registerGoogleMapsShortcode();
     ThemeSupport::registerYoutubeShortcode();
 
+    Shortcode::register('how-it-works', 'How It Works', 'Show 4-step 3D minime creation process', function () {
+        return Theme::partial('home-3d-process');
+    });
+
     if (is_plugin_active('simple-slider')) {
         add_filter(SIMPLE_SLIDER_VIEW_TEMPLATE, function () {
             return Theme::getThemeNamespace('partials.shortcodes.simple-slider.index');
